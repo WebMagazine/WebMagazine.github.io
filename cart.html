@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина | Мир Записных Книжек</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">📔 Мир Записных Книжек</div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="index.html">Ежедневники</a>
+            <a href="index.html">Блокноты</a>
+            <a href="index.html">Скетчбуки</a>
+            <a href="cart.html" class="cart-btn">🛒 Корзина (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <main class="cart-container">
+        <h1>Ваша корзина</h1>
+        
+        <div id="cart-items">
+            <!-- Товары будут здесь -->
+        </div>
+
+        <div class="cart-summary">
+            <p id="total-price">Итого: 0 ₽</p>
+            <button id="checkout-btn">Оформить заказ</button>
+        </div>
+    </main>
+
+    <script>
+        // Загружаем корзину из localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItems = document.getElementById('cart-items');
+        const totalPrice = document.getElementById('total-price');
+        const cartCount = document.getElementById('cart-count');
+
+        // Отображаем товары в корзине
+        function renderCart() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">Ваша корзина пуста</p>';
+                totalPrice.textContent = 'Итого: 0 ₽';
+                cartCount.textContent = '0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                html += `
+                    <div class="cart-item">
+                        <img src="images/${item.id === 1 ? 'classic' : item.id === 2 ? 'daily' : 'sketch'}.jpg" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <h3>${item.name}</h3>
+                            <p>${item.price} ₽</p>
+                        </div>
+                        <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
+                    </div>
+                `;
+                total += item.price;
+            });
+
+            cartItems.innerHTML = html;
+            totalPrice.textContent = `Итого: ${total} ₽`;
+            cartCount.textContent = cart.length;
+        }
+
+        // Удаление товара
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        // Оформление заказа (заглушка)
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            alert('Заказ оформлен! Спасибо за покупку 😊');
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        });
+
+        // Первый рендер
+        renderCart();
+    </script>
+</body>
+</html>

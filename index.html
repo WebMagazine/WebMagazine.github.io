@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир Записных Книжек | Интернет-магазин</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">📔 Мир Записных Книжек</div>
+        <nav>
+            <a href="#" class="active">Главная</a>
+            <a href="#">Ежедневники</a>
+            <a href="#">Блокноты</a>
+            <a href="#">Скетчбуки</a>
+            <a href="cart.html" class="cart-btn">🛒 Корзина (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Лучшие записные книжки для вас</h1>
+        <p>Бесплатная доставка от 1000 ₽</p>
+        <button class="cta">Смотреть каталог</button>
+    </section>
+
+    <section class="filters">
+        <button class="filter-btn active">Все</button>
+        <button class="filter-btn">Классические</button>
+        <button class="filter-btn">Ежедневники</button>
+        <button class="filter-btn">Скетчбуки</button>
+    </section>
+
+    <div class="products">
+        <!-- Товар 1 -->
+        <div class="product" data-category="classic">
+            <img src="images/classic.jpg" alt="Классическая тетрадь">
+            <h3>Классическая тетрадь</h3>
+            <p>120 страниц, линованная</p>
+            <p class="price">150 ₽</p>
+            <button class="buy-btn" onclick="addToCart(1, 'Классическая тетрадь', 150)">В корзину</button>
+        </div>
+
+        <!-- Товар 2 -->
+        <div class="product" data-category="daily">
+            <img src="images/daily.jpg" alt="Ежедневник">
+            <h3>Ежедневник 2024</h3>
+            <p>200 страниц, датированный</p>
+            <p class="price">300 ₽</p>
+            <button class="buy-btn" onclick="addToCart(2, 'Ежедневник 2024', 300)">В корзину</button>
+        </div>
+
+        <!-- Товар 3 -->
+        <div class="product" data-category="sketch">
+            <img src="images/sketch.jpg" alt="Скетчбук">
+            <h3>Скетчбук "Художник"</h3>
+            <p>80 страниц, плотная бумага</p>
+            <p class="price">250 ₽</p>
+            <button class="buy-btn" onclick="addToCart(3, 'Скетчбук "Художник"', 250)">В корзину</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
